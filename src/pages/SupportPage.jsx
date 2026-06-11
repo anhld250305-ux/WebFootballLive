@@ -8,17 +8,12 @@ export default function SupportPage() {
   const [formData, setFormData] = useState({ name: '', email: '', topic: '', message: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
-  const toggleFaq = (index) => {
-    setActiveFaq(activeFaq === index ? null : index);
-  };
+  const toggleFaq = (i) => setActiveFaq(activeFaq === i ? null : i);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -34,139 +29,116 @@ export default function SupportPage() {
     { q: t('support.faq.q1'), a: t('support.faq.a1') },
     { q: t('support.faq.q2'), a: t('support.faq.a2') },
     { q: t('support.faq.q3'), a: t('support.faq.a3') },
-    { q: t('support.faq.q4'), a: t('support.faq.a4') }
+    { q: t('support.faq.q4'), a: t('support.faq.a4') },
   ];
 
   return (
-    <main style={{ position: 'relative', zIndex: 10, paddingTop: '40px', paddingBottom: '80px' }}>
+    <main className="legal-page">
       <div className="container">
-        {/* Support Header */}
-        <section className="text-center" style={{ marginBottom: '60px' }}>
-          <motion.h2 
-            className="hero-title"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{ fontSize: '48px' }}
-          >
-            {t('support.title')} <span className="text-gradient-grass">{t('support.title_gradient')}</span>
-          </motion.h2>
-          <motion.p
-            className="hero-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            style={{ fontSize: '18px', maxWidth: '600px', margin: '12px auto 0' }}
-          >
-            {t('support.subtitle')}
-          </motion.p>
-        </section>
+        {/* Header */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+          <h1>{t('support.page_title')}<span className="grad">{t('support.page_grad')}</span></h1>
+          <p className="lead-sub">{t('support.page_sub')}</p>
+        </motion.div>
 
-        {/* FAQs Accordion */}
-        <section style={{ marginBottom: '80px' }}>
-          <h3 className="section-title text-center" style={{ fontSize: '26px' }}>{t('support.faq_title')}</h3>
+        {/* Intro Card */}
+        <motion.div className="legal-card" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} style={{ marginBottom: 40 }}>
+          <p style={{ fontSize: 16, lineHeight: 1.8, color: 'var(--text-soft)' }}>
+            {t('support.intro')}
+          </p>
+        </motion.div>
+
+        {/* 3.1. Technical Support */}
+        <motion.div className="legal-card" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} style={{ marginBottom: 24 }}>
+          <h2 style={{ color: 'var(--accent)', margin: '0 0 12px', fontSize: 20 }}>{t('support.tech_title')}</h2>
+          <ul style={{ margin: 0, padding: 0 }}>
+            <li>{t('support.tech_li1')}</li>
+            <li>{t('support.tech_li2')}</li>
+          </ul>
+        </motion.div>
+
+        {/* 3.2. Data Deletion */}
+        <motion.div className="legal-card" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }} style={{ marginBottom: 24 }}>
+          <h2 style={{ color: 'var(--accent)', margin: '0 0 12px', fontSize: 20 }}>{t('support.data_title')}</h2>
+          <p style={{ fontSize: 15, color: 'var(--text-soft)', lineHeight: 1.8, margin: 0 }}>
+            {t('support.data_desc')}
+          </p>
+        </motion.div>
+
+        {/* 3.3. Copyright & Partnership */}
+        <motion.div className="legal-card" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} style={{ marginBottom: 48 }}>
+          <h2 style={{ color: 'var(--accent)', margin: '0 0 12px', fontSize: 20 }}>{t('support.copyright_title')}</h2>
+          <ul style={{ margin: 0, padding: 0 }}>
+            <li>{t('support.copyright_li1')}</li>
+            <li>{t('support.copyright_li2')}</li>
+          </ul>
+        </motion.div>
+
+        {/* FAQ Section */}
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}>
+          <h2 style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>{t('support.faq_title')}</h2>
           <div className="faq-list">
-            {faqs.map((faq, index) => (
-              <div 
-                key={index} 
-                className={`faq-item ${activeFaq === index ? 'active' : ''}`}
-              >
-                <div className="faq-question" onClick={() => toggleFaq(index)}>
+            {faqs.map((faq, i) => (
+              <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`}>
+                <div className="faq-q" onClick={() => toggleFaq(i)}>
                   <span>{faq.q}</span>
-                  <span style={{ transition: 'transform 0.2s', transform: activeFaq === index ? 'rotate(180deg)' : 'none' }}>▼</span>
+                  <span className="arrow">▼</span>
                 </div>
-                <div className="faq-answer">
-                  <p style={{ lineHeight: 1.7 }}>{faq.a}</p>
-                </div>
+                <div className="faq-a"><p>{faq.a}</p></div>
               </div>
             ))}
           </div>
-        </section>
+        </motion.div>
 
-        {/* Support Request Form */}
-        <section>
-          <div className="glass-card contact-card">
-            <h3 style={{ fontSize: '24px', marginBottom: '8px', textAlign: 'center' }}>{t('support.contact_title')}</h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '30px', textAlign: 'center' }}>
-              {t('support.contact_subtitle')}
-            </p>
+        {/* Contact Form */}
+        <motion.div className="support-form" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+          <div className="legal-card" style={{ maxWidth: 680, margin: '0 auto' }}>
+            <h2 style={{ color: 'var(--text)', margin: '0 0 6px' }}>{t('support.form_title')}</h2>
+            <p style={{ fontSize: 14, color: 'var(--text-mute)', marginBottom: 28 }}>{t('support.form_sub')}</p>
 
             {isSubmitted ? (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                style={{ 
-                  padding: '20px', 
-                  borderRadius: '12px', 
-                  backgroundColor: 'rgba(0, 255, 135, 0.1)', 
-                  border: '1px solid var(--primary-grass)', 
-                  color: 'var(--primary-grass)',
-                  textAlign: 'center',
-                  fontWeight: '600'
-                }}
-              >
-                {t('form.success')}
-              </motion.div>
+              <div className="success-msg">{t('form.success')}</div>
             ) : (
               <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label>{t('form.name')}</label>
-                  <input 
-                    type="text" 
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Leo Messi"
-                    required
-                  />
+                <div className="form-grid">
+                  <div className="form-group">
+                    <label>{t('form.name')}</label>
+                    <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+                  </div>
+                  <div className="form-group">
+                    <label>{t('form.email')}</label>
+                    <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+                  </div>
+                  <div className="form-group full">
+                    <label>{t('form.topic')}</label>
+                    <select name="topic" value={formData.topic} onChange={handleChange}>
+                      <option value="">{t('form.topic_select')}</option>
+                      <option value="bug">{t('form.topic_bug')}</option>
+                      <option value="feature">{t('form.topic_feature')}</option>
+                      <option value="premium">{t('form.topic_premium')}</option>
+                      <option value="data">{t('form.topic_data')}</option>
+                      <option value="dmca">{t('form.topic_dmca')}</option>
+                      <option value="other">{t('form.topic_other')}</option>
+                    </select>
+                  </div>
+                  <div className="form-group full">
+                    <label>{t('form.message')}</label>
+                    <textarea name="message" value={formData.message} onChange={handleChange} rows="5" placeholder={t('form.message_placeholder')} required></textarea>
+                  </div>
                 </div>
-
-                <div className="form-group">
-                  <label>{t('form.email')}</label>
-                  <input 
-                    type="email" 
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="messi@intermiami.com"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>{t('form.topic')}</label>
-                  <select 
-                    name="topic" 
-                    value={formData.topic}
-                    onChange={handleInputChange}
-                  >
-                    <option value="">{t('form.topic_select')}</option>
-                    <option value="lag">{t('form.topic_lag')}</option>
-                    <option value="link">{t('form.topic_link')}</option>
-                    <option value="feature">{t('form.topic_feature')}</option>
-                    <option value="other">{t('form.topic_other')}</option>
-                  </select>
-                </div>
-
-                <div className="form-group" style={{ marginBottom: '30px' }}>
-                  <label>{t('form.message')}</label>
-                  <textarea 
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    rows="5"
-                    placeholder={t('form.message_placeholder')}
-                    required
-                  ></textarea>
-                </div>
-
-                <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '14px' }}>
+                <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '14px', marginTop: 8 }}>
                   {t('form.submit')}
                 </button>
               </form>
             )}
+
+            {/* Email contact */}
+            <div style={{ marginTop: 24, padding: '16px 20px', background: 'rgba(0,230,118,0.05)', border: '1px solid rgba(0,230,118,0.12)', borderRadius: 10, textAlign: 'center' }}>
+              <p style={{ fontSize: 14, color: 'var(--text-soft)', margin: '0 0 4px' }}>{t('support.email_label')}</p>
+              <a href="mailto:huym9@icloud.com" style={{ color: 'var(--accent)', fontWeight: 700, fontSize: 16 }}>huym9@icloud.com</a>
+            </div>
           </div>
-        </section>
+        </motion.div>
       </div>
     </main>
   );

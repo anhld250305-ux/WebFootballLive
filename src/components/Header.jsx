@@ -1,76 +1,33 @@
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Header() {
   const { t } = useTranslation();
-  const location = useLocation();
-
-  const handleScrollToSection = (id) => {
-    if (location.pathname !== '/' && location.pathname !== '/marketing') {
-      // If not on home page, navigation will redirect through react-router and let home page scroll
-      return;
-    }
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
-    <header className="header">
-      <div className="container header-container">
-        <Link to="/" className="logo">
-          <span className="logo-icon">⚽</span>
-          <h1>WebFootball<span>Live</span></h1>
+    <nav className="nav">
+      <div className="container nav-inner">
+        <Link to="/" className="brand">
+          <img className="brand-icon" src="/logo.png" alt="FootballLive" style={{ width: 32, height: 32, borderRadius: 8 }} />
+          <span>Football<span className="accent-text">Live</span></span>
         </Link>
-        
-        <nav>
-          <NavLink 
-            to="/" 
-            className={({ isActive }) => isActive && location.hash === '' ? 'active' : ''}
-          >
-            {t('nav.home', 'Home')}
-          </NavLink>
-          
-          <a 
-            href="#live" 
-            onClick={(e) => {
-              // Only prevent default if we are on home page
-              if (location.pathname === '/' || location.pathname === '/marketing') {
-                e.preventDefault();
-                handleScrollToSection('live');
-              }
-            }}
-            className={location.pathname === '/' && location.hash === '#live' ? 'active' : ''}
-          >
-            {t('nav.live', 'Live')}
-          </a>
 
-          <a 
-            href="#schedule" 
-            onClick={(e) => {
-              if (location.pathname === '/' || location.pathname === '/marketing') {
-                e.preventDefault();
-                handleScrollToSection('schedule');
-              }
-            }}
-          >
-            {t('nav.schedule', 'Schedule')}
-          </a>
+        <div className="nav-links">
+          <a href="/#features">{t('nav.features')}</a>
+          <a href="/#screens">{t('nav.screens')}</a>
+          <NavLink to="/privacy-policy">{t('nav.privacy')}</NavLink>
+          <NavLink to="/support">{t('nav.support')}</NavLink>
+        </div>
 
-          <NavLink 
-            to="/support" 
-            className={({ isActive }) => isActive ? 'active' : ''}
-          >
-            {t('nav.support', 'Support')}
-          </NavLink>
-        </nav>
-        
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <LanguageSwitcher />
+          <a href="#download" className="nav-cta">
+            {t('nav.download')}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
         </div>
       </div>
-    </header>
+    </nav>
   );
 }

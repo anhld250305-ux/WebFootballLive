@@ -2,305 +2,204 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
+const CheckIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+);
+
 export default function LandingPage() {
   const { t } = useTranslation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
-  const handleScrollToLive = () => {
-    const liveSection = document.getElementById('live');
-    if (liveSection) {
-      liveSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const features = [
+    { icon: '📡', title: t('features.f1_title'), desc: t('features.f1_desc') },
+    { icon: '🎬', title: t('features.f2_title'), desc: t('features.f2_desc') },
+    { icon: '📊', title: t('features.f3_title'), desc: t('features.f3_desc') },
+    { icon: '🏆', title: t('features.f4_title'), desc: t('features.f4_desc') },
+    { icon: '⭐', title: t('features.f5_title'), desc: t('features.f5_desc') },
+    { icon: '📰', title: t('features.f6_title'), desc: t('features.f6_desc') },
+  ];
 
-  // Mock live/upcoming match list for premium dynamic look
-  const mockMatches = [
-    {
-      id: 1,
-      status: 'live',
-      minute: "76'",
-      league: 'UEFA Champions League',
-      team1: { name: 'Real Madrid', logo: '👑', score: 2 },
-      team2: { name: 'Man City', logo: '🩵', score: 2 },
-      channel: 'VTV Cab / WebFootball 1',
-      winner: null
-    },
-    {
-      id: 2,
-      status: 'live',
-      minute: "34'",
-      league: 'Premier League',
-      team1: { name: 'Arsenal', logo: '🔴', score: 1 },
-      team2: { name: 'Chelsea', logo: '🔵', score: 0 },
-      channel: 'K+ Sport / WebFootball 2',
-      winner: 'team1'
-    },
-    {
-      id: 3,
-      status: 'upcoming',
-      time: '02:00',
-      date: 'Tomorrow',
-      league: 'La Liga',
-      team1: { name: 'Barcelona', logo: '🔵🔴', score: '-' },
-      team2: { name: 'Atletico Madrid', logo: '⚪🔴', score: '-' },
-      channel: 'SCTV15 / WebFootball 3',
-      winner: null
-    },
-    {
-      id: 4,
-      status: 'finished',
-      league: 'Serie A',
-      team1: { name: 'Juventus', logo: '⚫⚪', score: 3 },
-      team2: { name: 'AC Milan', logo: '🔴⚫', score: 1 },
-      channel: 'WebFootball Live Recap',
-      winner: 'team1'
-    }
+  const privacyChecks = [
+    { b: t('privacy_section.check1_b'), text: t('privacy_section.check1') },
+    { b: t('privacy_section.check2_b'), text: t('privacy_section.check2') },
+    { b: t('privacy_section.check3_b'), text: t('privacy_section.check3') },
+    { b: t('privacy_section.check4_b'), text: t('privacy_section.check4') },
   ];
 
   return (
-    <main style={{ position: 'relative', zIndex: 10 }}>
-      {/* 1. Hero Section */}
-      <section className="section" style={{ minHeight: '90vh', display: 'flex', alignItems: 'center', paddingTop: '80px' }}>
-        <div className="container" style={{ maxWidth: '850px', textAlign: 'center' }}>
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="badge-gold"
-            style={{ marginBottom: '16px', display: 'inline-block' }}
-          >
-            {t('hero.badge', 'Next-Gen Football Live Stream')}
-          </motion.div>
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="hero-title"
-          >
-            {t('hero.title', 'Experience Premier')} <span className="text-gradient-grass">{t('hero.title_gradient', 'Football Matches')}</span>
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="hero-subtitle"
-          >
-            {t('hero.subtitle', 'Watch major leagues like Premier League, Champions League, La Liga... in high definition, with no ads, and live English commentaries.')}
-          </motion.p>
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}
-          >
-            <button onClick={handleScrollToLive} className="btn btn-primary" style={{ padding: '14px 36px', fontSize: '16px' }}>
-              <span>▶</span> {t('hero.btn_watch', 'Watch Live Now')}
-            </button>
-            <a href="#schedule" className="btn btn-outline" style={{ padding: '14px 36px', fontSize: '16px' }}>
-              {t('hero.btn_schedule', "Today's Schedule")}
-            </a>
+    <main>
+      {/* ============ HERO ============ */}
+      <header className="hero">
+        <div className="container hero-grid">
+          <div>
+            <motion.div className="hero-icon" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}>
+              <img src="/logo.png" alt="FootballLive" style={{ width: 48, height: 48, borderRadius: 12 }} />
+            </motion.div>
+            <motion.span className="eyebrow" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+              <span className="dot"></span> {t('hero.eyebrow')}
+            </motion.span>
+            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+              {t('hero.title_1')}<span className="grad">{t('hero.title_grad')}</span>
+            </motion.h1>
+            <motion.p className="lead" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+              {t('hero.lead')}
+            </motion.p>
+
+            <motion.div className="cta-row" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+              <a className="app-store-badge" href="#download" aria-label="Download on the App Store">
+                <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true" style={{ width: 22, height: 22 }}>
+                  <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                </svg>
+                <span>
+                  <span className="label-small">Download on the</span><br/>
+                  <span className="label-big">App Store</span>
+                </span>
+              </a>
+              <a className="btn btn-ghost" href="#features">
+                {t('nav.features')}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </motion.div>
+
+            <motion.div className="trust-row" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                {t('hero.trust_1')}
+              </span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+                {t('hero.trust_2')}
+              </span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg>
+                {t('hero.trust_3')}
+              </span>
+            </motion.div>
+          </div>
+
+          {/* Hero Visual - Phone Mockups */}
+          <motion.div className="hero-visual" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3, duration: 0.7 }}>
+            <div className="glow"></div>
+            <div className="phone-frame">
+              <img src="/15.png" alt="FootballLive app screenshot" loading="eager" />
+            </div>
+            <div className="phone-frame float-2">
+              <img src="/screenshot2.jpg" alt="FootballLive live scores" loading="eager" />
+            </div>
           </motion.div>
         </div>
-      </section>
+      </header>
 
-      {/* 2. Live Matches Section */}
-      <section className="section" id="live" style={{ padding: '60px 0' }}>
+      {/* ============ FEATURES ============ */}
+      <section className="section" id="features">
         <div className="container">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center" 
-            style={{ marginBottom: '40px' }}
-          >
-            <h2 className="section-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
-              <span className="live-badge" style={{ animation: 'none' }}><span className="live-dot" style={{ animation: 'liveBlink 1s infinite' }}></span>{t('nav.live', 'Live')}</span>
-              {t('live.section_title', 'Hot Live Matches')}
-            </h2>
-            <p style={{ color: 'var(--text-muted)', marginTop: '8px' }}>{t('live.section_subtitle', 'Real-time live score updates, stream HD with no buffering.')}</p>
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+            <span className="section-tag">{t('features.tag')}</span>
+            <h2 className="section-title">{t('features.title')}</h2>
+            <p className="section-sub">{t('features.sub')}</p>
           </motion.div>
 
-          <div className="matches-grid">
-            {mockMatches.map((match, index) => (
-              <motion.div 
-                key={match.id}
-                className="glass-card match-card"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-              >
-                <div className="match-header">
-                  <span>🏆 {match.league}</span>
-                  {match.status === 'live' && (
-                    <span className="live-badge" style={{ fontSize: '10px' }}>
-                      <span className="live-dot"></span> LIVE {match.minute}
-                    </span>
-                  )}
-                  {match.status === 'upcoming' && (
-                    <span className="badge-gold" style={{ fontSize: '10px', background: 'rgba(255,215,0,0.15)', color: 'var(--accent-gold)' }}>
-                      🕒 {match.time} ({t('live.comming_soon', 'Upcoming')})
-                    </span>
-                  )}
-                  {match.status === 'finished' && (
-                    <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontWeight: 'bold' }}>
-                      ✓ {t('live.finished', 'Finished')}
-                    </span>
-                  )}
-                </div>
-
-                <div className="match-teams">
-                  <div className="team">
-                    <div className="team-info">
-                      <span className="team-logo">{match.team1.logo}</span>
-                      <span className="team-name">{match.team1.name}</span>
-                    </div>
-                    <span className={`team-score ${match.winner === 'team1' ? 'winner' : ''}`}>
-                      {match.team1.score}
-                    </span>
-                  </div>
-                  
-                  <div className="team">
-                    <div className="team-info">
-                      <span className="team-logo">{match.team2.logo}</span>
-                      <span className="team-name">{match.team2.name}</span>
-                    </div>
-                    <span className={`team-score ${match.winner === 'team2' ? 'winner' : ''}`}>
-                      {match.team2.score}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="match-footer">
-                  <span className="match-channel">📺 {match.channel}</span>
-                  {match.status === 'live' ? (
-                    <button className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '13px', borderRadius: '8px' }}>
-                      {t('live.watch_now', 'Watch')}
-                    </button>
-                  ) : match.status === 'upcoming' ? (
-                    <button className="btn btn-outline" style={{ padding: '8px 16px', fontSize: '13px', borderRadius: '8px', opacity: 0.7 }}>
-                      🔔 Remind
-                    </button>
-                  ) : (
-                    <button className="btn btn-outline" style={{ padding: '8px 16px', fontSize: '13px', borderRadius: '8px' }}>
-                      Replay
-                    </button>
-                  )}
-                </div>
+          <div className="features-grid">
+            {features.map((f, i) => (
+              <motion.div key={i} className="feature" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
+                <div className="icon"><span>{f.icon}</span></div>
+                <h3>{f.title}</h3>
+                <p>{f.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3. Features Section */}
-      <section className="section" style={{ padding: '80px 0', background: 'rgba(0,0,0,0.2)', borderTop: '1px solid var(--border-glass)' }}>
+      {/* ============ SCREENSHOTS iPhone ============ */}
+      <section className="section" id="screens" style={{ paddingTop: 0 }}>
         <div className="container">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
-            style={{ marginBottom: '50px' }}
-          >
-            <h2 className="section-title">{t('features.title', 'Why Choose WebFootballLive?')}</h2>
-            <p style={{ color: 'var(--text-muted)' }}>{t('features.subtitle', 'The most modern and stable football live streaming platform.')}</p>
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+            <span className="section-tag">{t('screens.tag')}</span>
+            <h2 className="section-title">{t('screens.title')}</h2>
+            <p className="section-sub">{t('screens.sub')}</p>
           </motion.div>
 
-          <div className="features-grid">
-            {/* Feature 1 */}
-            <motion.div 
-              className="glass-card feature-card"
-              whileHover={{ y: -5, borderColor: 'rgba(0, 255, 135, 0.25)' }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-            >
-              <div className="feature-icon">⚡</div>
-              <h3 style={{ fontSize: '20px', marginBottom: '12px' }}>{t('features.f1_title', '1080p HD Quality')}</h3>
-              <p style={{ color: 'var(--text-muted)', fontSize: '14px', lineHeight: 1.7 }}>
-                {t('features.f1_desc', 'Sharp images, smooth 60fps frame rates, and low latency technology ensure you never miss any goal scoring moments.')}
-              </p>
-            </motion.div>
-
-            {/* Feature 2 */}
-            <motion.div 
-              className="glass-card feature-card"
-              whileHover={{ y: -5, borderColor: 'rgba(0, 255, 135, 0.25)' }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-            >
-              <div className="feature-icon">🎙️</div>
-              <h3 style={{ fontSize: '20px', marginBottom: '12px' }}>{t('features.f2_title', 'Pro Commentary')}</h3>
-              <p style={{ color: 'var(--text-muted)', fontSize: '14px', lineHeight: 1.7 }}>
-                {t('features.f2_desc', 'Professional, funny, and engaging commentators bring the stadium atmosphere straight to your screen.')}
-              </p>
-            </motion.div>
-
-            {/* Feature 3 */}
-            <motion.div 
-              className="glass-card feature-card"
-              whileHover={{ y: -5, borderColor: 'rgba(0, 255, 135, 0.25)' }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-            >
-              <div className="feature-icon">📊</div>
-              <h3 style={{ fontSize: '20px', marginBottom: '12px' }}>{t('features.f3_title', 'Live Match Stats')}</h3>
-              <p style={{ color: 'var(--text-muted)', fontSize: '14px', lineHeight: 1.7 }}>
-                {t('features.f3_desc', 'View real-time statistics including ball possession, shots on target, corners, and cards updated automatically during the match.')}
-              </p>
-            </motion.div>
+          <div className="showcase">
+            <div className="scroller">
+              <div className="shot"><img src="/15.png" alt="FootballLive Screenshot 1" loading="lazy" /></div>
+              <div className="shot"><img src="/screenshot2.jpg" alt="FootballLive Screenshot 4" loading="lazy" /></div>
+              <div className="shot"><img src="/screenshot3.png" alt="FootballLive Screenshot 5" loading="lazy" /></div>
+              <div className="shot"><img src="/screenshot4.png" alt="FootballLive Screenshot 6" loading="lazy" /></div>
+              <div className="shot"><img src="/screenshot5.png" alt="FootballLive Screenshot 7" loading="lazy" /></div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 4. CTA / Schedule Section */}
-      <section className="section" id="schedule" style={{ padding: '80px 0' }}>
+      {/* ============ iPad SHOWCASE ============ */}
+      <section className="section" id="ipad" style={{ paddingTop: 0 }}>
         <div className="container">
-          <motion.div 
-            className="glass-card text-center"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            style={{ 
-              padding: '60px 40px', 
-              background: 'radial-gradient(circle, rgba(0, 255, 135, 0.04) 0%, rgba(6, 9, 19, 0.8) 100%)',
-              borderColor: 'rgba(0, 255, 135, 0.15)'
-            }}
-          >
-            <h2 className="section-title" style={{ fontSize: '32px' }}>{t('cta.title', 'Never Miss Any Goal')}</h2>
-            <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '16px auto 32px', fontSize: '16px' }}>
-              {t('cta.subtitle', 'Subscribe to get notifications about match schedules and direct streaming links of your favorite teams.')}
-            </p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap', maxWidth: '500px', margin: '0 auto' }}>
-              <input 
-                type="email" 
-                placeholder="example@email.com" 
-                style={{ 
-                  padding: '14px 20px', 
-                  borderRadius: '10px', 
-                  border: '1px solid var(--border-glass)', 
-                  backgroundColor: 'rgba(0,0,0,0.3)', 
-                  color: 'white',
-                  flex: 1,
-                  minWidth: '240px'
-                }} 
-              />
-              <button className="btn btn-primary" style={{ padding: '14px 28px', fontSize: '15px' }}>
-                {t('cta.btn_notify', 'Notify Me')}
-              </button>
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} style={{ textAlign: 'center', marginBottom: 40 }}>
+            <span className="section-tag">iPad Experience</span>
+            <h2 className="section-title" style={{ textAlign: 'center' }}>Trải nghiệm tuyệt vời trên iPad.</h2>
+            <p className="section-sub centered">Giao diện tối ưu cho màn hình lớn — mọi thống kê, tỉ số và tin tức hiển thị rõ ràng hơn bao giờ hết.</p>
+          </motion.div>
+
+          <div className="showcase">
+            <div className="scroller" style={{ justifyContent: 'center' }}>
+              <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0 }}>
+                <img src="/screenshot1.jpg" alt="FootballLive iPad Screenshot 1" loading="lazy" />
+              </motion.div>
+              <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }}>
+                <img src="/screenshot1-1.jpg" alt="FootballLive iPad Screenshot 2" loading="lazy" />
+              </motion.div>
+              <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
+                <img src="/image.png" alt="FootballLive iPad Screenshot 1" loading="lazy" />
+              </motion.div>
+              <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
+                <img src="/image copy.png" alt="FootballLive iPad Screenshot 2" loading="lazy" />
+              </motion.div>
+              <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
+                <img src="/image copy 2.png" alt="FootballLive iPad Screenshot 3" loading="lazy" />
+              </motion.div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ PRIVACY-FIRST ============ */}
+      <section className="section" id="privacy-first">
+        <div className="container why">
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <span className="section-tag">{t('privacy_section.tag')}</span>
+            <h2 className="section-title">{t('privacy_section.title')}</h2>
+            <p className="section-sub">{t('privacy_section.sub')}</p>
+          </motion.div>
+          <motion.div className="why-card" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <ul className="why-list">
+              {privacyChecks.map((c, i) => (
+                <li key={i}>
+                  <span className="check"><CheckIcon /></span>
+                  <span><b>{c.b}</b> {c.text}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ============ CTA ============ */}
+      <section className="cta-section" id="download">
+        <div className="container">
+          <motion.div className="cta-card" initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
+            <h2>{t('cta.title')}</h2>
+            <p>{t('cta.subtitle')}</p>
+            <a className="app-store-badge" href="#" aria-label="Download on the App Store" style={{ margin: '0 auto' }}>
+              <svg viewBox="0 0 384 512" fill="currentColor" aria-hidden="true" style={{ width: 22, height: 22 }}>
+                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+              </svg>
+              <span>
+                <span className="label-small">Download on the</span><br/>
+                <span className="label-big">App Store</span>
+              </span>
+            </a>
           </motion.div>
         </div>
       </section>

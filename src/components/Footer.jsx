@@ -3,29 +3,40 @@ import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
   const { t } = useTranslation();
-  
+
   return (
-    <footer className="footer">
+    <footer>
       <div className="container">
-        <div className="footer-content">
-          <div className="footer-brand" style={{ maxWidth: '350px' }}>
-            <Link to="/" className="logo" style={{ marginBottom: '16px', display: 'inline-flex' }}>
-              <span className="logo-icon">⚽</span>
-              <h1 style={{ fontSize: '20px' }}>WebFootball<span>Live</span></h1>
+        <div className="foot-grid">
+          <div>
+            <Link to="/" className="brand" style={{ marginBottom: '14px', display: 'inline-flex' }}>
+              <img className="brand-icon" src="/logo.png" alt="FootballLive" style={{ width: 28, height: 28, borderRadius: 6 }} />
+              <span>Football<span className="accent-text">Live</span></span>
             </Link>
-            <p>{t('footer.tagline', 'High quality HD football live stream, live scores updated 24/7')}</p>
+            <p style={{ margin: 0, color: 'var(--text-mute)', maxWidth: '280px', fontSize: '14px', lineHeight: 1.6 }}>
+              {t('footer.tagline')}
+            </p>
           </div>
-          
-          <div className="footer-links">
-            <Link to="/">{t('nav.home', 'Home')}</Link>
-            <Link to="/support">{t('nav.support', 'Support')}</Link>
-            <Link to="/privacy-policy">{t('privacy.title', 'Privacy Policy')}</Link>
-            <Link to="/terms">{t('terms.title', 'Terms of Service')}</Link>
+          <div>
+            <h4>{t('footer.col_app')}</h4>
+            <a href="/#features">{t('nav.features')}</a>
+            <a href="/#screens">{t('nav.screens')}</a>
+            <a href="#download">{t('nav.download')}</a>
+          </div>
+          <div>
+            <h4>{t('footer.col_legal')}</h4>
+            <Link to="/privacy-policy">{t('privacy.page_title')}{t('privacy.page_grad')}</Link>
+            <Link to="/terms">{t('terms.page_title')}{t('terms.page_grad')}</Link>
+          </div>
+          <div>
+            <h4>{t('footer.col_help')}</h4>
+            <Link to="/support">{t('nav.support')}</Link>
+            <a href="mailto:huym9@icloud.com">huym9@icloud.com</a>
           </div>
         </div>
-        
-        <div className="copyright">
-          <p>© {new Date().getFullYear()} WebFootballLive. {t('footer.rights', 'All rights reserved.')}</p>
+        <div className="foot-bottom">
+          <span>© {new Date().getFullYear()} {t('footer.rights')}</span>
+          <span>Made for iPhone & iPad</span>
         </div>
       </div>
     </footer>

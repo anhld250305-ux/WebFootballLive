@@ -4,61 +4,44 @@ import { useTranslation } from 'react-i18next';
 
 export default function PrivacyPolicyPage() {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <main style={{ position: 'relative', zIndex: 10, paddingTop: '40px', paddingBottom: '80px' }}>
-      <div className="container" style={{ maxWidth: '800px' }}>
-        <section className="text-center" style={{ marginBottom: '50px' }}>
-          <motion.h2 
-            className="hero-title"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{ fontSize: '42px' }}
-          >
-            {t('privacy.title')} <span className="text-gradient-grass">{t('privacy.title_gradient')}</span>
-          </motion.h2>
-          <motion.p
-            className="hero-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            style={{ fontSize: '18px', margin: '12px auto 0' }}
-          >
-            {t('privacy.subtitle')}
-          </motion.p>
-        </section>
+    <main className="legal-page">
+      <div className="container">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+          <h1>{t('privacy.page_title')}<span className="grad">{t('privacy.page_grad')}</span></h1>
+          <p className="lead-sub">{t('privacy.page_sub')}</p>
+        </motion.div>
 
-        <motion.div 
-          className="glass-card"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          style={{ padding: '40px', lineHeight: 1.8 }}
-        >
-          <p style={{ marginBottom: '24px', fontSize: '16px' }}>{t('privacy.intro')}</p>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '32px' }}>{t('last_updated')}</p>
+        <motion.div className="legal-card" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
+          <p className="updated">{t('privacy.updated')}</p>
+          <p>{t('privacy.intro')}</p>
 
-          <h3 style={{ fontSize: '20px', color: 'var(--primary-grass)', marginBottom: '12px' }}>{t('privacy.s1_title')}</h3>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>{t('privacy.s1_desc')}</p>
+          <h2>{t('privacy.s1_title')}</h2>
+          <ul>
+            <li>{t('privacy.s1_li1')}</li>
+            <li>{t('privacy.s1_li2')}</li>
+            <li>{t('privacy.s1_li3')}</li>
+          </ul>
 
-          <h3 style={{ fontSize: '20px', color: 'var(--primary-grass)', marginBottom: '12px' }}>{t('privacy.s2_title')}</h3>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>{t('privacy.s2_desc')}</p>
+          <h2>{t('privacy.s2_title')}</h2>
+          <ul>
+            <li>{t('privacy.s2_li1')}</li>
+            <li>{t('privacy.s2_li2')}</li>
+          </ul>
 
-          <h3 style={{ fontSize: '20px', color: 'var(--primary-grass)', marginBottom: '12px' }}>{t('privacy.s3_title')}</h3>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>{t('privacy.s3_desc')}</p>
+          <h2>{t('privacy.s3_title')}</h2>
+          <ul>
+            <li>{t('privacy.s3_li1')}</li>
+            <li>{t('privacy.s3_li2')}</li>
+          </ul>
 
-          <hr style={{ border: 'none', borderBottom: '1px solid var(--border-glass)', margin: '40px 0' }} />
-
-          <h3 style={{ fontSize: '20px', marginBottom: '16px' }}>Contact Information</h3>
-          <p style={{ color: 'var(--text-muted)' }}>
-            If you have any questions about this Privacy Policy, please contact us at:<br />
-            <strong>Email:</strong> privacy@webfootballlive.com
-          </p>
+          <div className="contact-box">
+            <h3>{t('legal.contact_title')}</h3>
+            <p>{t('legal.contact_desc')}</p>
+            <p style={{ fontWeight: 700, color: 'var(--accent)' }}>huym9@icloud.com</p>
+          </div>
         </motion.div>
       </div>
     </main>

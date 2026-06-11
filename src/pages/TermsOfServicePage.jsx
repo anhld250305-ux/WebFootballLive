@@ -4,61 +4,45 @@ import { useTranslation } from 'react-i18next';
 
 export default function TermsOfServicePage() {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   return (
-    <main style={{ position: 'relative', zIndex: 10, paddingTop: '40px', paddingBottom: '80px' }}>
-      <div className="container" style={{ maxWidth: '800px' }}>
-        <section className="text-center" style={{ marginBottom: '50px' }}>
-          <motion.h2 
-            className="hero-title"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{ fontSize: '42px' }}
-          >
-            {t('terms.title')} <span className="text-gradient-grass">{t('terms.title_gradient')}</span>
-          </motion.h2>
-          <motion.p
-            className="hero-subtitle"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            style={{ fontSize: '18px', margin: '12px auto 0' }}
-          >
-            {t('terms.subtitle')}
-          </motion.p>
-        </section>
+    <main className="legal-page">
+      <div className="container">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+          <h1>{t('terms.page_title')}<span className="grad">{t('terms.page_grad')}</span></h1>
+          <p className="lead-sub">{t('terms.page_sub')}</p>
+        </motion.div>
 
-        <motion.div 
-          className="glass-card"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          style={{ padding: '40px', lineHeight: 1.8 }}
-        >
-          <p style={{ marginBottom: '24px', fontSize: '16px' }}>{t('terms.intro')}</p>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '32px' }}>{t('last_updated')}</p>
+        <motion.div className="legal-card" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
+          <p className="updated">{t('terms.updated')}</p>
 
-          <h3 style={{ fontSize: '20px', color: 'var(--primary-grass)', marginBottom: '12px' }}>{t('terms.s1_title')}</h3>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>{t('terms.s1_desc')}</p>
+          <h2>{t('terms.s1_title')}</h2>
+          <p>{t('terms.s1_p1')}</p>
+          <p>{t('terms.s1_p2')}</p>
 
-          <h3 style={{ fontSize: '20px', color: 'var(--primary-grass)', marginBottom: '12px' }}>{t('terms.s2_title')}</h3>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>{t('terms.s2_desc')}</p>
+          <h2>{t('terms.s2_title')}</h2>
+          <ul>
+            <li>{t('terms.s2_li1')}</li>
+            <li>{t('terms.s2_li2')}</li>
+            <li>{t('terms.s2_li3')}</li>
+          </ul>
 
-          <h3 style={{ fontSize: '20px', color: 'var(--primary-grass)', marginBottom: '12px' }}>{t('terms.s3_title')}</h3>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>{t('terms.s3_desc')}</p>
+          <h2>{t('terms.s3_title')}</h2>
+          <ul>
+            <li>{t('terms.s3_li1')}</li>
+            <li>{t('terms.s3_li2')}</li>
+            <li>{t('terms.s3_li3')}</li>
+          </ul>
 
-          <hr style={{ border: 'none', borderBottom: '1px solid var(--border-glass)', margin: '40px 0' }} />
+          <h2>{t('terms.s4_title')}</h2>
+          <p>{t('terms.s4_p1')}</p>
 
-          <h3 style={{ fontSize: '20px', marginBottom: '16px' }}>Contact Information</h3>
-          <p style={{ color: 'var(--text-muted)' }}>
-            If you have any questions about these Terms of Service, please contact us at:<br />
-            <strong>Email:</strong> legal@webfootballlive.com
-          </p>
+          <div className="contact-box">
+            <h3>{t('legal.contact_title')}</h3>
+            <p>{t('legal.contact_desc')}</p>
+            <p style={{ fontWeight: 700, color: 'var(--accent)' }}>huym9@icloud.com</p>
+          </div>
         </motion.div>
       </div>
     </main>
