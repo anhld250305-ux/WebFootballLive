@@ -143,21 +143,21 @@ export default function LandingPage() {
           </motion.div>
 
           <div className="showcase">
-            <div className="scroller" style={{ justifyContent: 'center' }}>
+            <div className="scroller">
               <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0 }}>
-                <img src="/screenshot1.jpg" alt="FootballLive iPad Screenshot 1" loading="lazy" />
+                <img src="/screenshot1.jpg" alt="FootballLive iPad - All Matches" loading="lazy" />
               </motion.div>
-              <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 }}>
-                <img src="/screenshot1-1.jpg" alt="FootballLive iPad Screenshot 2" loading="lazy" />
+              <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.08 }}>
+                <img src="/screenshot1-1.jpg" alt="FootballLive iPad - World Cup" loading="lazy" />
               </motion.div>
-              <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-                <img src="/image.png" alt="FootballLive iPad Screenshot 1" loading="lazy" />
+              <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.16 }}>
+                <img src="/image.png" alt="FootballLive iPad - Live Scores" loading="lazy" />
               </motion.div>
-              <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-                <img src="/image copy.png" alt="FootballLive iPad Screenshot 2" loading="lazy" />
+              <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.24 }}>
+                <img src="/image copy.png" alt="FootballLive iPad - Match Details" loading="lazy" />
               </motion.div>
-              <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-                <img src="/image copy 2.png" alt="FootballLive iPad Screenshot 3" loading="lazy" />
+              <motion.div className="shot" style={{ width: 360, borderRadius: 16 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.32 }}>
+                <img src="/image copy 2.png" alt="FootballLive iPad - News Feed" loading="lazy" />
               </motion.div>
             </div>
           </div>

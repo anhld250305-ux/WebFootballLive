@@ -7,7 +7,7 @@ export default function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const currentLanguage = i18n.language || 'vi';
+  const currentLanguage = i18n.language || 'en';
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -30,16 +30,7 @@ export default function LanguageSwitcher() {
     <div ref={dropdownRef} style={{ position: 'relative' }}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="btn btn-outline"
-        style={{
-          padding: '8px 16px',
-          fontSize: '14px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '6px',
-          borderRadius: '8px',
-          backgroundColor: 'rgba(255,255,255,0.03)'
-        }}
+        className="lang-btn"
       >
         <span>🌐</span>
         <span>{languageNames[currentLanguage]}</span>
@@ -48,7 +39,6 @@ export default function LanguageSwitcher() {
 
       {isOpen && (
         <div
-          className="glass-card"
           style={{
             position: 'absolute',
             top: 'calc(100% + 8px)',
@@ -58,8 +48,9 @@ export default function LanguageSwitcher() {
             zIndex: 1000,
             borderRadius: '12px',
             boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
-            border: '1px solid var(--border-glass)',
-            backgroundColor: 'rgba(10, 15, 30, 0.95)'
+            border: '1px solid var(--border)',
+            backgroundColor: 'rgba(5, 18, 26, 0.95)',
+            backdropFilter: 'blur(12px)'
           }}
         >
           {Object.keys(languageNames).map((lng) => (
@@ -72,7 +63,7 @@ export default function LanguageSwitcher() {
                 textAlign: 'left',
                 background: 'none',
                 border: 'none',
-                color: currentLanguage === lng ? 'var(--primary-grass)' : 'var(--text-main)',
+                color: currentLanguage === lng ? 'var(--accent)' : 'var(--text)',
                 fontWeight: currentLanguage === lng ? '700' : '500',
                 fontSize: '14px',
                 cursor: 'pointer',
@@ -90,7 +81,7 @@ export default function LanguageSwitcher() {
               }}
             >
               <span>{languageNames[lng]}</span>
-              {currentLanguage === lng && <span style={{ color: 'var(--primary-grass)' }}>✓</span>}
+              {currentLanguage === lng && <span style={{ color: 'var(--accent)' }}>✓</span>}
             </button>
           ))}
         </div>
